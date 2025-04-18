@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气应用</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- 天气动画容器 -->
+    <div id="weather-animation-container" class="weather-animation-container"></div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-cloud-sun"></i> 天气应用</h1>
+            <div class="search-container">
+                <input type="text" id="city-search" placeholder="输入城市名称...">
+                <button id="search-btn"><span class="search-text">搜</span><span class="search-text">索</span><i class="fas fa-search"></i></button>
+                <button id="use-location" title="使用当前位置"><i class="fas fa-map-marker-alt"></i></button>
+                <button id="refresh-btn" title="刷新天气"><i class="fas fa-sync-alt"></i></button>
+            </div>
+        </header>
+
+        <main>
+            <!-- 欢迎信息 -->
+            <div id="welcome" class="welcome-message"></div>
+
+            <!-- 天气信息 -->
+            <div id="weather-info" class="hidden">
+                <!-- 当前天气 -->
+                <div class="current-weather">
+                    <div class="location">
+                        <h2 id="location-name">--</h2>
+                        <div class="datetime-container">
+                            <div class="date-wrapper">
+                                <span class="date-icon">📅</span>
+                                <p id="current-date">--</p>
+                            </div>
+                            <div class="time-wrapper">
+                                <span class="time-icon">🕒</span>
+                                <p id="current-time" class="real-time-clock">--:--:--</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="current-temp">
+                        <div id="weather-icon" class="weather-emoji">🌤️</div>
+                        <div class="temp-details">
+                            <h2 id="temperature">--°C</h2>
+                            <p id="weather-description">--</p>
+                            <p>体感温度: <span id="feels-like">--°C</span></p>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="detail">
+                            <i class="fas fa-tint"></i>
+                            <div>
+                                <p>湿度</p>
+                                <p id="humidity">--%</p>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-wind"></i>
+                            <div>
+                                <p>风速</p>
+                                <p id="wind-speed">-- m/s</p>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-compress-alt"></i>
+                            <div>
+                                <p>气压</p>
+                                <p id="pressure">-- hPa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 出门建议 -->
+                <div id="advice-container" class="advice-container hidden">
+                    <div id="advice-content"></div>
+                </div>
+
+                <!-- 天气预报 -->
+                <div class="forecast-container">
+                    <h3>未来七天预报</h3>
+                    <div id="forecast" class="forecast"></div>
+                </div>
+            </div>
+
+            <!-- 加载中指示器 -->
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>正在获取天气数据...</p>
+            </div>
+
+            <!-- 错误信息 -->
+            <div id="error-message" class="error-message hidden">
+                <div class="error-content">
+                    <h3>出错了</h3>
+                    <p id="error-text"></p>
+                    <button id="close-error">关闭</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>数据来源: Open-Meteo API, <a href="https://wttr.in/" target="_blank">wttr.in</a></p>
+            <div class="settings">
+                <button id="toggle-unit" title="切换温度单位"><i class="fas fa-temperature-high"></i> 切换温度单位</button>
+                <button id="toggle-theme" title="切换主题"><i class="fas fa-sun theme-icon" id="theme-icon"></i> 切换主题</button>
+            </div>
+        </footer>
+
+        <!-- 通知 -->
+        <div id="notification" class="notification" style="display: none;"></div>
+    </div>
+
+    <!-- 脚本 -->
+    <script src="utils.js"></script>
+    <script src="weather-service.js"></script>
+    <script src="wttr-service.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 
